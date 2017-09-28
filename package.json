@@ -1,9 +1,10 @@
 {
-    "name": "gatsby-starter-default",
-    "description": "Gatsby default starter",
+    "name": "hillsborough-seminary",
+    "description": "Webpage for LDS Hillsborough seminary class",
     "version": "1.0.0",
-    "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+    "author": "Dan Seethaler <dan@seethalers.com>",
     "dependencies": {
+        "@danseethaler/ut": "0.0.1",
         "gatsby": "^1.9.17",
         "gatsby-link": "^1.6.15",
         "gatsby-plugin-react-helmet": "^1.0.5",
