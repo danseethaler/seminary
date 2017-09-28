@@ -4,6 +4,7 @@ import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 import { Button } from '../components/bits';
 import glamorous, { div } from 'glamorous';
+import { links } from '../data';
 
 import './index.css';
 import '../assets/lato.css';
@@ -41,7 +42,7 @@ const Header = () => (
             padding: '.7rem',
             borderBottom: '1px solid #dddddd',
             margin: '0 auto',
-            maxWidth: 960,
+            maxWidth: 960
         }}
     >
         <NavContainer>
@@ -58,17 +59,14 @@ const Header = () => (
             </h3>
         </NavContainer>
         <NavContainer>
-          <NavLink to="/devotional">Devotional</NavLink>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/devotional">Devotional</NavLink>
+            <NavLink to="/links">Links</NavLink>
             <Button
                 border
                 primary
                 onClick={() => {
-                    [
-                        'https://wise.ldschurch.org/Students.aspx/Index',
-                        'https://docs.google.com/spreadsheets/d/1-GnGfrWhAc5y6B_PZpRpsOgNMs5bUGtPKupaiWPsH68/edit#gid=137770678',
-                        'https://www.lds.org/manual/doctrinal-mastery-book-of-mormon-teacher-material?lang=eng',
-                        'https://www.lds.org/manual/book-of-mormon-seminary-teacher-manual-2017?lang=eng'
-                    ].map(link => window.open(link));
+                    links.map(link => (link.launch ? window.open(link.url) : null));
                 }}
             >
                 Launch
