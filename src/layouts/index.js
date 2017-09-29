@@ -46,7 +46,7 @@ const Header = () => (
     }}
   >
     <NavContainer>
-      <h3 style={{ margin: 0 }}>
+      <h4 style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
@@ -56,7 +56,7 @@ const Header = () => (
         >
           Hillsborough Seminary
         </Link>
-      </h3>
+      </h4>
     </NavContainer>
     <NavContainer>
       <NavLink to="/">Home</NavLink>

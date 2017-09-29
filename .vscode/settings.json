@@ -1,7 +1,8 @@
 {
-    "search.exclude": {
-        "**/.cache": true,
-        "**/node_modules": true,
-        "**/bower_components": true
-    }
+  "search.exclude": {
+    "**/.cache": true,
+    "**/public": true,
+    "**/node_modules": true,
+    "**/bower_components": true
+  }
 }
