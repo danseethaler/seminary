@@ -19,7 +19,6 @@ const styles = bind({ color, size })
 const Button = glamorous.button(
   {
     fontSize: '16px',
-    margin: 10,
     border: 'none',
     cursor: 'pointer',
     display: 'inline-block',
@@ -57,7 +56,7 @@ const Button = glamorous.button(
         color: styles.color(props),
       }
     }
-  }
+  },
 )
 
 Button.defaultProps = {
