@@ -43,12 +43,12 @@ export default class Schedule extends Component {
       .map(date => <LessonSummary key={date.date} {...date} />)
 
     return (
-      <FadeIn>
+      <div>
         <h3 style={{ marginTop: 30, borderBottom: '1px solid #ddd' }}>
           Schedule
         </h3>
-        <div style={{ height: 530, overflow: 'auto' }}>{datesRender}</div>
-      </FadeIn>
+        <div>{datesRender}</div>
+      </div>
     )
   }
 }
