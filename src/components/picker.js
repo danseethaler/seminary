@@ -1,16 +1,37 @@
 import React from 'react'
 import { Component } from 'react'
 import PropTypes from 'prop-types'
+import { shuffle } from '../utils'
 
 class Picker extends Component {
+  constructor(props) {
+    super(props)
+
+    const { items, skipInitial } = props
+
+    this.shuffledItems = items.slice()
+    shuffle(this.shuffledItems)
+
+    this.currentItems = this.shuffledItems.slice()
+    if (skipInitial) {
+      this.currentItems = this.currentItems.filter(
+        item => !skipInitial.includes(item)
+      )
+    }
+  }
   state = {
     item: 'Click to begin',
   }
   pick = () => {
-    this.setState({ item: this.getRandomItem() })
+    this.setState({ item: this.getNextRandomItem() })
+    // console.log(this.state.item);
   }
-  getRandomItem = () =>
-    this.props.items[Math.floor(Math.random() * this.props.items.length)]
+  getNextRandomItem = () => {
+    if (!this.currentItems.length) {
+      this.currentItems = this.shuffledItems.slice()
+    }
+    return this.currentItems.shift()
+  }
 
   getPickerProps = (props = {}) => ({
     ...props,

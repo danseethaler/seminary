@@ -35,6 +35,9 @@ const Button = glamorous.button(
     ':active': {
       transform: 'translateY(1px)',
     },
+    // '@media (max-width: 600px)': {
+    //   display: 'none',
+    // },
   },
   ({ noshadow, ...props }) => ({
     boxShadow: noshadow
@@ -56,23 +59,40 @@ const Button = glamorous.button(
         color: styles.color(props),
       }
     }
-  },
+  }
 )
 
 Button.defaultProps = {
   size: 'small',
 }
 
-const DateDiv = props => (
-  <div>
-    <h5>{props.date}</h5>
-    {props.assignments.map(assignment => (
-      <span style={{ display: 'block' }} key={assignment.name}>
-        {assignment.name}: {assignment.assignee}
-      </span>
-    ))}
-    <hr />
-  </div>
+const FadeIn = glamorous.div(
+  {
+    ':after': {
+      content: ' ',
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+      pointerEvents: 'none',
+      width: '100%',
+      height: '100%',
+    },
+  },
+  ({ fadeSide = 'bottom' }) => {
+    return {
+      ':after': {
+        backgroundImage: `linear-gradient(
+          to ${fadeSide},
+          rgba(255, 255, 255, 0) 50%,
+          rgba(255, 255, 255, 1) 95%
+        )`,
+      },
+    }
+  }
 )
 
-export { Button, DateDiv }
+FadeIn.defaultProps = {
+  size: 'small',
+}
+
+export { Button, FadeIn }

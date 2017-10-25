@@ -2,17 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
-import { Button } from '../components/bits'
 import glamorous, { div } from 'glamorous'
-import { links } from '../data'
 
 import './index.css'
+import './custom.css'
 import '../assets/lato.css'
 
 const NavContainer = div({
   display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'center',
+  margin: 8
 })
 
 const NavLink = props => {
@@ -23,27 +23,15 @@ const NavLink = props => {
     color: '#2d414e',
     textDecoration: 'none',
     fontFamily: 'Lato, sans-serif',
+    padding: '4px 6px'
   })
 
-  // Add active-page className
-  if (typeof window !== 'undefined') {
-    passProps.className =
-      location.pathname === passProps.to ? 'active-page' : null
-  }
   return <NavLink {...passProps} />
 }
 
 const Header = () => (
   <div
-    style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '.7rem',
-      borderBottom: '1px solid #dddddd',
-      margin: '0 auto',
-      maxWidth: 960,
-    }}
+    className="app-navigation-wrapper"
   >
     <NavContainer>
       <h4 style={{ margin: 0 }}>
@@ -59,47 +47,62 @@ const Header = () => (
       </h4>
     </NavContainer>
     <NavContainer>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/devotional">Devotional</NavLink>
-      <NavLink to="/links">Links</NavLink>
-      <Button
-        border
-        primary
-        onClick={() => {
-          links.map(link => (link.launch ? window.open(link.url) : null))
-        }}
-      >
-        Launch
-      </Button>
+      <NavLink to="/schedule" activeClassName="active-page">Schedule</NavLink>
+      <NavLink to="/random" activeClassName="active-page">Random</NavLink>
+      <NavLink to="/links" activeClassName="active-page">Links</NavLink>
     </NavContainer>
   </div>
 )
 
-const TemplateWrapper = ({ children }) => (
-  <div>
-    <Helmet
-      title="LDS Seminary | Hillsborough, NC"
-      meta={[
-        {
-          name: 'description',
-          content: 'LDS Seminary Class | Hillsborough',
-        },
-        { name: 'keywords', content: 'seminary, lds, church, youth' },
-      ]}
-    />
-    <Header />
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '0px 1.0875rem 1.45rem',
-        paddingTop: 0,
-      }}
-    >
-      {children()}
-    </div>
-  </div>
-)
+class TemplateWrapper extends React.Component {
+  state = {
+    err: false,
+  }
+
+  componentDidCatch(err, info) {
+    this.setState({ err, errorMsg: err.toString(), info })
+  }
+
+  render() {
+    const { children } = this.props
+    if (this.state.err) {
+      return (
+        <div>
+          <p>Oops! An error occurred. Please try again.</p>
+          <p>{this.state.errorMsg}</p>
+        </div>
+      )
+    }
+    return (
+      <div>
+        <Helmet
+          title="LDS Seminary | Hillsborough, NC"
+          meta={[
+            {
+              name: 'description',
+              content: 'LDS Seminary Class | Hillsborough',
+            },
+            {
+              name: 'keywords',
+              content: 'seminary, lds, church, youth',
+            },
+          ]}
+        />
+        <Header />
+        <div
+          style={{
+            margin: '0 auto',
+            maxWidth: 960,
+            padding: '0px 1.0875rem 1.45rem',
+            paddingTop: 0,
+          }}
+        >
+          {children()}
+        </div>
+      </div>
+    )
+  }
+}
 
 TemplateWrapper.propTypes = {
   children: PropTypes.func,

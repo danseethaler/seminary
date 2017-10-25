@@ -1,0 +1,26 @@
+@media only screen and (max-width: 600px) {
+  .app-navigation-wrapper {
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .app-navigation-wrapper {
+    flex-direction: row;
+  }
+}
+.app-navigation-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem;
+  border-bottom: 1px solid #dddddd;
+  margin: 0 auto;
+  max-width: 960px;
+}
+.active-page {
+  border-bottom: 2px solid #2d414e;
+  /* color: white;
+  background-color: #2d414e;
+  border-radius: 3px;
+  padding: 2px 12px; */
+}
